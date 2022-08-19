@@ -1,37 +1,19 @@
-// import { createAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-// export const addContact = createAction('contacts/add');
-// export const deleteContact = createAction('contacts/delete');
-// export const filterContacts = createAction('contacts/changeFilter');
+export const getContactsRequest = createAction('contacts/getContactsRequest');
+export const getContactsSuccess = createAction('contacts/getContactsSuccess');
+export const getContactsError = createAction('contacts/getContactsError');
 
-// import { createSlice } from '@reduxjs/toolkit';
+export const addContactsRequest = createAction('contacts/addContactsRequest');
+export const addContactsSuccess = createAction('contacts/addContactsSuccess');
+export const addContactsError = createAction('contacts/addContactsError');
 
-// const todoSlice = createSlice({
-//   name: 'todo',
-//   initialState: {
-//     items: [],
-//     filter: 'all',
-//     // isLoading: false,
-//   },
-//   reducers: {
-//     addTodo(state, { payload }) {
-//       return { ...state, items: [...state.items, payload] };
-//       //   state.items.push(payload);
-//     },
-//     removeTodo(state, { payload }) {
-//       return { ...state, items: state.items.filter(el => el.id !== payload) };
-//     },
-//     updateStatusTodo(state, { payload }) {
-//       state.items = state.items.map(el =>
-//         el.id !== payload ? el : { ...el, isDoneStatus: !el.isDoneStatus }
-//       );
-//     },
-//     changeFilter(state, { payload }) {
-//       state.filter = payload;
-//     },
-//   },
-// });
+export const removeContactsRequest = createAction(
+  'contacts/removeContactsRequest'
+);
+export const removeContactsSuccess = createAction(
+  'contacts/removeContactsSuccess'
+);
+export const removeContactsError = createAction('contacts/removeContactsError');
 
-// export const { addTodo, removeTodo, updateStatusTodo, changeFilter } =
-//   todoSlice.actions;
-// export default todoSlice.reducer;
+export const filterContacts = createAction('contacts/changeFilter');
