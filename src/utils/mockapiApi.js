@@ -8,9 +8,7 @@ export const getContactsApi = () => {
 };
 
 export const addContactsApi = item => {
-  return axios.post('/contacts', item).then(({ data }) => {
-    return data;
-  });
+  return axios.post('/contacts', item).then(response => response.data);
 };
 
 export const removeContactsApi = id => {

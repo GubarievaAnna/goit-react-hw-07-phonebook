@@ -27,14 +27,8 @@ export const addContacts = item => dispatch => {
   dispatch(addContactsRequest());
 
   addContactsApi(item)
-    .then(newAddedItem => {
-      console.log(item);
-      dispatch(addContactsSuccess(newAddedItem));
-    })
-    .catch(err => {
-      console.log(item);
-      dispatch(addContactsError(err.message));
-    });
+    .then(addedItem => dispatch(addContactsSuccess(addedItem)))
+    .catch(err => dispatch(addContactsError(err.message)));
 };
 
 export const removeContacts = id => dispatch => {
