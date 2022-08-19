@@ -14,3 +14,9 @@
 .name {
   font-weight: 700;
 }
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

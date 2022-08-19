@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getContacts } from 'redux/contacts/contactsSelector';
 import { addContacts } from '../../redux/contacts/contactsOperations';
 import s from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const items = useSelector(state => state.contacts.items);
+  const items = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const onInputChange = e => {
