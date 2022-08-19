@@ -1,8 +1,8 @@
-import { createAction } from '@reduxjs/toolkit';
+// import { createAction } from '@reduxjs/toolkit';
 
-export const addContact = createAction('contacts/add');
-export const deleteContact = createAction('contacts/delete');
-export const filterContacts = createAction('contacts/changeFilter');
+// export const addContact = createAction('contacts/add');
+// export const deleteContact = createAction('contacts/delete');
+// export const filterContacts = createAction('contacts/changeFilter');
 
 // import { createSlice } from '@reduxjs/toolkit';
 
