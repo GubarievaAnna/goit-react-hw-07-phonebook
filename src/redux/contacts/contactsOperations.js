@@ -1,40 +1,42 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getContactsApi,
   addContactsApi,
   removeContactsApi,
 } from '../../utils/mockapiApi';
-import {
-  getContactsRequest,
-  getContactsSuccess,
-  getContactsError,
-  addContactsRequest,
-  addContactsSuccess,
-  addContactsError,
-  removeContactsRequest,
-  removeContactsSuccess,
-  removeContactsError,
-} from './contactsActions';
 
-export const getContacts = () => dispatch => {
-  dispatch(getContactsRequest());
+export const getContacts = createAsyncThunk(
+  'getContacts',
+  async (_, thunkApi) => {
+    try {
+      const items = await getContactsApi();
+      return items;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 
-  getContactsApi()
-    .then(items => dispatch(getContactsSuccess(items)))
-    .catch(err => dispatch(getContactsError(err.message)));
-};
+export const addContacts = createAsyncThunk(
+  'addContacts',
+  async (item, { rejectWithValue }) => {
+    try {
+      const addedItem = addContactsApi(item);
+      return addedItem;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
-export const addContacts = item => dispatch => {
-  dispatch(addContactsRequest());
-
-  addContactsApi(item)
-    .then(addedItem => dispatch(addContactsSuccess(addedItem)))
-    .catch(err => dispatch(addContactsError(err.message)));
-};
-
-export const removeContacts = id => dispatch => {
-  dispatch(removeContactsRequest());
-
-  removeContactsApi(id)
-    .then(id => dispatch(removeContactsSuccess(id)))
-    .catch(err => dispatch(removeContactsError(err.message)));
-};
+export const removeContacts = createAsyncThunk(
+  'removeContacts',
+  async (param, { rejectWithValue }) => {
+    try {
+      const id = await removeContactsApi(param);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

@@ -1,21 +1,11 @@
 import { combineReducers, createReducer } from '@reduxjs/toolkit';
-import {
-  getContactsRequest,
-  getContactsSuccess,
-  getContactsError,
-  addContactsRequest,
-  addContactsSuccess,
-  addContactsError,
-  removeContactsRequest,
-  removeContactsSuccess,
-  removeContactsError,
-  filterContacts,
-} from './contactsActions';
+import { getContacts, addContacts, removeContacts } from './contactsOperations';
+import { filterContacts } from './contactsActions';
 
 const itemsReducer = createReducer([], {
-  [getContactsSuccess]: (_, { payload }) => payload,
-  [addContactsSuccess]: (state, { payload }) => [...state, payload],
-  [removeContactsSuccess]: (state, { payload }) =>
+  [getContacts.fulfilled]: (_, { payload }) => payload,
+  [addContacts.fulfilled]: (state, { payload }) => [...state, payload],
+  [removeContacts.fulfilled]: (state, { payload }) =>
     state.filter(el => el.id !== payload),
 });
 
@@ -24,24 +14,24 @@ const filterReducer = createReducer('', {
 });
 
 const loadingReducer = createReducer(false, {
-  [getContactsRequest]: () => true,
-  [getContactsSuccess]: () => false,
-  [getContactsError]: () => false,
-  [addContactsRequest]: () => true,
-  [addContactsSuccess]: () => false,
-  [addContactsError]: () => false,
-  [removeContactsRequest]: () => true,
-  [removeContactsSuccess]: () => false,
-  [removeContactsError]: () => false,
+  [getContacts.pending]: () => true,
+  [getContacts.fulfilled]: () => false,
+  [getContacts.rejected]: () => false,
+  [addContacts.pending]: () => true,
+  [addContacts.fulfilled]: () => false,
+  [addContacts.rejected]: () => false,
+  [removeContacts.pending]: () => true,
+  [removeContacts.fulfilled]: () => false,
+  [removeContacts.rejected]: () => false,
 });
 
 const errorReducer = createReducer('', {
-  [getContactsRequest]: () => null,
-  [getContactsError]: (_, { payload }) => payload,
-  [addContactsRequest]: () => null,
-  [addContactsError]: (_, { payload }) => payload,
-  [removeContactsRequest]: () => null,
-  [removeContactsError]: (_, { payload }) => payload,
+  [getContacts.pending]: () => null,
+  [getContacts.rejected]: (_, { payload }) => payload,
+  [addContacts.pending]: () => null,
+  [addContacts.rejected]: (_, { payload }) => payload,
+  [removeContacts.pending]: () => null,
+  [removeContacts.rejected]: (_, { payload }) => payload,
 });
 
 export const contactsReducer = combineReducers({
